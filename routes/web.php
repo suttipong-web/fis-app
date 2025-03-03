@@ -14,9 +14,10 @@ Route::post('/login', [AutnController::class, 'checklogin'])->name('checklogin')
 
 // กลุ่ม route ที่ต้องการให้ตรวจสอบการ login ก่อนเข้าถึง
 Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
-    //    Route::get('/admin/', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Route::get('/admin/', [AdminController::class, 'index'])->name('admin.dashboard');
     });
 
     Route::middleware(['auth'])->group(function () {
