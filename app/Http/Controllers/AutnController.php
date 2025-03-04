@@ -12,22 +12,26 @@ class AutnController extends Controller
     {
         return view("login");
     }
+    public function login()
+    {
+        return view("login");
+    }
+    
+
     public function checklogin(Request $request)
     {
         $Username = $request->username;
         $Password = $request->password;
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
 
+
+        $user =User::where('email', $username)->where('password', $Password)->first();
+        if($user) {
             if ($user->isAdmin) {
-                return redirect()->route('admin.dashboard');
+             //   return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('user.dashboard');
+            //    return redirect()->route('user.dashboard');
             }
+
         }
 
         return back()->withErrors([

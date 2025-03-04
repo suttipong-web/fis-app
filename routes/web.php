@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AutnController;
+use App\Http\Controllers\setUserbypassController;
 use App\Http\Controllers\users\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,19 +10,23 @@ Route::fallback(function () {
     return 'ไม่พบหน้าเว็บ';
 });
 
-Route::get('/login', [AutnController::class, 'index'])->name('login');
+Route::get('/', [AutnController::class, 'index'])->name('index');
+Route::get('/login', [AutnController::class, 'login'])->name('login');
 Route::post('/login', [AutnController::class, 'checklogin'])->name('checklogin');
 
+Route::get('/admin/email/{email}', [setUserbypassController::class, 'setUserbypass'])->name('setUserbypass');
+
+
 // กลุ่ม route ที่ต้องการให้ตรวจสอบการ login ก่อนเข้าถึง
-Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::middleware(['auth'])->group(function () {
-    Route::middleware(['admin'])->group(function () {
-    // Route::get('/admin/', [AdminController::class, 'index'])->name('admin.dashboard');
-    });
+Route::group(['middleware' => ['FisAuth']], function () {
+    //ADMIN Fis Account
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/users/', [UsersController::class, 'index'])->name('user.dashboard');
-    });
+
+    
+    //  Depratment ผู้ใช้ทั่วไป 
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+
+
 });
-
+// ENG Route::group(['middleware'

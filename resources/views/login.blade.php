@@ -45,7 +45,7 @@ $rand = rand(1000, 9999);
                             </div>
                             <h4>Finance Infomation System </h4>
                             <h6 class="font-weight-light">เข้าสู่ระบบระบบบริหารงบประมาณคณะวิศวกรรมศาสตร์ </h6>
-                            <form class="pt-2" action="/login" method="post">
+                            <form class="pt-2" action="/login" method="post"  enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-lg" id="username"
@@ -62,10 +62,10 @@ $rand = rand(1000, 9999);
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn"
-                                        href="index.html">เข้าสู่ระบบ</button>
+                                        >เข้าสู่ระบบ</button>
 
                                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                        href="index.html">เข้าสู่ระบบด้วย @cmu.ac.th</a>
+                                        href="#">เข้าสู่ระบบด้วย @cmu.ac.th</a>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
 
