@@ -29,6 +29,7 @@ class setUserbypassController extends Controller
                 $request->session()->put('positionName2', $profile["positionName2"]);  
                 $request->session()->put('user_type', $profile["user_type"]);
                 $request->session()->put('isAdmin',$profile["isAdmin"]);
+                
                 if($profile["user_type"]=="admin"){          
                     return redirect()->intended('/admin')->with('success', 'Login Successfull');                    
                 }else {                   

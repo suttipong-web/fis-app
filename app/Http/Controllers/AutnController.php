@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,11 +21,17 @@ class AutnController extends Controller
 
     public function checklogin(Request $request)
     {
+        $request->validate([
+            'username' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        
         $Username = $request->username;
-        $Password = $request->password;
+        $Password = md5($request->password);
 
 
-        $user =User::where('email', $username)->where('password', $Password)->first();
+        $user =User::where('email', $Username)->where('password', $Password)->first();
         if($user) {
             if ($user->isAdmin) {
              //   return redirect()->route('admin.dashboard');
@@ -34,6 +41,11 @@ class AutnController extends Controller
 
         }
 
+
+
+
+
+        
         return back()->withErrors([
             'email' => 'ข้อมูลเข้าสู่ระบบไม่ถูกต้อง',
         ]);
