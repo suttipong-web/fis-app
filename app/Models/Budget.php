@@ -23,6 +23,9 @@ class Budget extends Model
         'budge_balance',
         'budget_detail',   
         'gid',
-        'plan'
+        'plan',
+        'bdate',
+        'budget_detail',
+        'is_withdraw'
     ];
 }

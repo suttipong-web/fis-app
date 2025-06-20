@@ -21,9 +21,19 @@ Route::get('/admin/email/{email}', [setUserbypassController::class, 'setUserbypa
 Route::group(['middleware' => ['FisAuth']], function () {
     //ADMIN Fis Account
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
     // จัดการ งบประมาณ
     Route::get('/admin/budget/', [budgetController::class, 'index'])->name('budget.index');
-    Route::post('/admin/budget/add', [budgetController::class, 'addBudget'])->name('budget.add');    
+
+    // เพิ่มงบประมาณ (Create)
+    Route::get('/admin/budget/create', [BudgetController::class, 'create'])->name('budget.create');
+    Route::post('/admin/budget/store', [BudgetController::class, 'store'])->name('budget.store');
+    // แก้ไขงบประมาณ (Edit)
+    Route::get('/admin/budget/{id}/edit', [BudgetController::class, 'edit'])->name('budget.edit');
+    Route::post('/admin/budget/{id}/update', [BudgetController::class, 'update'])->name('budget.update');
+
+Route::delete('/admin/budget/{id}', [BudgetController::class, 'destroy'])->name('budget.destroy');
+
     //  Depratment ผู้ใช้ทั่วไป 
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     
