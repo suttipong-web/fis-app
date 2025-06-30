@@ -29,12 +29,18 @@
                                         {{-- ปีงบประมาณ --}}
                                     <div class="form-group">
                                         <label for="by_id">ปีงบประมาณ</label>
+                                        <pre>
+
                                         <select name="sclyear" class="form-control">
+                                            
+                                            @if($budgetYear)
                                              @foreach ($budgetYear as $y)
-                                                <option value="{{$y->id}}"
-                                                    {{ ($budget->by_id == $y->id) ? 'selected' : '' }}>
-                                                    {{ $y->by_year + 543 }}  </option>
+                                               <option value="{{ $y->by_id }}" 
+    {{ ($budget?->by_id == $y->by_id) ? 'selected' : '' }}>
+    {{ $y->by_year + 543 }}
+</option>
                                             @endforeach
+                                            @endif
                                         </select>
                                     </div>
 
@@ -44,7 +50,7 @@
                                         <select name="type_id" class="form-control">
                                             @foreach ($budgetTypes as $type)
                                                 <option value="{{ $type->id }}"
-                                                    {{ $budget->type_id == $type->id ? 'selected' : '' }}>
+                                                    {{ $budget?->type_id == $type->id ? 'selected' : '' }}>
                                                     {{ $type->type_name }}
                                                 </option>
                                             @endforeach

@@ -24,17 +24,17 @@ class budgetController extends Controller
         $budgetTypes = BudgetType::all();
 
         // กำหนดค่าเริ่มต้นสำหรับ year และ budgetTypeId ถ้าไม่ได้รับค่า
-        $budgetYear = $budgetYear = BudgetSetting::orderBy('by_year', 'desc')->get();
+        $budgetYear = BudgetSetting::orderBy('by_year', 'desc')->get();
 
 
 
         // ดึงข้อมูลงบประมาณตามเงื่อนไข
         $query = DB::table('budgets')
-            ->leftJoin('budget_setting', 'budgets.by_id', '=', 'budget_setting.id')
+            ->leftJoin('budget_setting', 'budgets.by_id', '=', 'budget_setting.by_id')
             ->leftJoin('fund', 'budgets.fund_id', '=', 'fund.fund_id')
             ->leftJoin('department', 'budgets.dep_id', '=', 'department.dep_id')
             ->leftJoin('activity', 'budgets.activity_id', '=', 'activity.activity_id')
-            ->leftJoin('budget_type', 'budgets.type_id', '=', 'budget_type.id')
+            ->leftJoin('budget_type', 'budgets.type_id', '=', 'budget_type.type_id')
             ->select(
                 'budgets.*',
                 'budget_type.type_name',
@@ -54,10 +54,28 @@ class budgetController extends Controller
         }
 
         $budgets = $query->orderBy('budget_setting.by_year', 'desc')->get();
+        $budgetplansMap = [];
+
+        foreach ($budgets as $budget) {
+            $budgetplansMap[$budget->budget_id] = DB::table('budget_plan')
+                ->where('budget_id', $budget->budget_id)
+                ->get();
+           
+
+                 // ดึงข้อมูล plan
+                $plans = DB::table('budget_plan')
+                    ->where('budget_id', $budget->budget_id)
+                    ->get();
+
+                // ใส่ข้อมูลเข้า map
+                $budgetplansMap[$budget->budget_id] = $plans;
+
+                // ใส่รวมยอดเข้า object
+                $budget->plan_total = $plans->sum('plan_budget');
+        }
 
 
-
-        return view('Admin.budget.index', compact('budgets', 'budgetYear', 'budgetTypeId', 'budgetTypes', 'getYear'));
+        return view('Admin.budget.index', compact('budgets', 'budgetYear', 'budgetTypeId', 'budgetTypes', 'getYear', 'budgetplansMap'));
 
     }
 
@@ -79,7 +97,7 @@ class budgetController extends Controller
         // ดึงรายการประเภทงบทั้งหมด
         $budgetTypes = BudgetType::all();
         // กำหนดค่าเริ่มต้นสำหรับ year และ budgetTypeId ถ้าไม่ได้รับค่า
-        $budgetYear = $budgetYear = BudgetSetting::orderBy('by_year', 'desc')->get();
+        $budgetYear = DB::table('budget_setting')->orderBy('by_year')->get();
 
         return view('Admin.budget.form', [
             'mode' => 'create',
