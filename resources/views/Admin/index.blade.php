@@ -61,7 +61,7 @@
                     <path
                       d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5" />
                   </svg></p>
-                <p class="fs-25 mb-2" ><a href="#" class="linkMenuIcon">สำรองงบประมาณ</a></p>
+                <p class="fs-25 mb-2" ><a href="/admin/reservations/" class="linkMenuIcon">สำรองงบประมาณ</a></p>
                 <p>(30 รายการ)</p>
               </div>
             </div>

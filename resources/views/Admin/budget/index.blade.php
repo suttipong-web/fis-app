@@ -121,8 +121,7 @@
                                                                                 {{ $budget->category }}
                                                                                 {{ $budget->budget_no }}
                                                                                 {{ $budget->budget_detail }}
-                                                                                จำนวนงบประมาณ ({{ number_format($budget->budget_money, 2) }}) </h5>
-                                                                        
+                                                                                จำนวนงบประมาณ ({{ number_format($budget->budget_money, 2) }}) </h5>                                                                       
                                                                           
                                                                     </div>
                                                                     <div class="modal-body">

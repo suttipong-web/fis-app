@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\budgetController;
 use App\Http\Controllers\admin\BudgetPlanController;
+use App\Http\Controllers\admin\BudgetReservationController;
 use App\Http\Controllers\AutnController;
 use App\Http\Controllers\setUserbypassController;
 use App\Http\Controllers\users\UsersController;
@@ -38,6 +39,10 @@ Route::group(['middleware' => ['FisAuth']], function () {
     Route::put('/admin/plan/{id}', [BudgetPlanController::class, 'update'])->name('budget_plan.update');
     Route::delete('/admin/plan/{id}', [BudgetPlanController::class, 'destroy'])->name('budget_plan.destroy');
     Route::get('/admin/plan/list/{budget_id}', [BudgetPlanController::class, 'list']);
+
+    //สำรองงบประมาณ 
+     Route::get('/admin/reservations/', [BudgetReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/admin/reservations/create', [BudgetReservationController::class, 'create'])->name('reservations.create');
 
 
 
