@@ -98,7 +98,7 @@ $rand = rand(1000, 9999);
     <script src="js/settings.js"></script>
     <script src="js/todolist.js"></script>
     <!-- endinject -->
-
+    
 </body>
 
 </html>

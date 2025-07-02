@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
     <link rel="stylesheet" href="/css/main.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="/images/favicon.png" />
-    
-
+    <link rel="shortcut icon" href="/images/favicon.png" />    
+    @yield('addTaghead')
 </head>
 
 <body>

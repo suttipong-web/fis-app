@@ -41,9 +41,9 @@ Route::group(['middleware' => ['FisAuth']], function () {
     Route::get('/admin/plan/list/{budget_id}', [BudgetPlanController::class, 'list']);
 
     //สำรองงบประมาณ 
-     Route::get('/admin/reservations/', [BudgetReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/admin/reservations/', [BudgetReservationController::class, 'index'])->name('reservations.index');
     Route::get('/admin/reservations/create', [BudgetReservationController::class, 'create'])->name('reservations.create');
-
+    Route::post('/admin/reservations/store', [BudgetReservationController::class, 'store'])->name('reservations.store');
 
 
 
