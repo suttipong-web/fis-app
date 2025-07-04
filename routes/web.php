@@ -44,12 +44,18 @@ Route::group(['middleware' => ['FisAuth']], function () {
     Route::get('/admin/reservations/', [BudgetReservationController::class, 'index'])->name('reservations.index');
     Route::get('/admin/reservations/create', [BudgetReservationController::class, 'create'])->name('reservations.create');
     Route::post('/admin/reservations/store', [BudgetReservationController::class, 'store'])->name('reservations.store');
+    Route::post('/admin/reservations/addSessionbudget', [BudgetReservationController::class, 'addSessionbudget'])->name('addSessionbudget');
+    Route::get('/admin/reservations/getSessionBudgets', [BudgetReservationController::class, 'getSessionBudgets'])->name('reservations.getSessionBudgets');
 
-
-
+    Route::get('/getBudgetAllbyDep', [BudgetReservationController::class, 'getBudgetAllbyDep'])->name('getBudgetAllbyDep');
+    Route::get('/getBudgetPlanByBudgetID', [BudgetReservationController::class, 'getBudgetPlanByBudgetID'])->name('getBudgetPlanByBudgetID');
 
     //  Depratment ผู้ใช้ทั่วไป 
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+
+
+
+
     
 });
 // ENG Route::group(['middleware'

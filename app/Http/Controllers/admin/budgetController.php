@@ -136,10 +136,8 @@ class budgetController extends Controller
             'bdate' => now(),
             'is_withdraw' => 0,
             'budget_money_bal' => 0
-
         ]);
-
-        return redirect()->route('budget.index')->with('success', 'บันทึกงบประมาณใหม่เรียบร้อยแล้ว');
+        return redirect()->route('budget.index')->with('success', 'บันทึกงบประมาณใหม่เรียบร้อยแล้ว');        
     }
 
     public function edit($id)
